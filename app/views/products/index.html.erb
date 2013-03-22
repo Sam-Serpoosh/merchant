@@ -1,0 +1,23 @@
+<% title "Products" %>
+
+<table>
+  <tr>
+    <th>Image</th>
+    <th>Title & Description</th>
+    <th>Price</th>
+  </tr>
+  <% for product in @products %>
+    <tr>
+      <td><%= image_tag "products/#{product.image_url}" %></td>
+      <td>
+        <span>
+          <%=link_to product.title, product_path(product), class: "product_title" %>
+        </span>
+        <%= product.description %>
+      </td>
+      <td><%= print_price(product.price) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "Create a New Product", new_product_path, id: "new_product" %></p>
