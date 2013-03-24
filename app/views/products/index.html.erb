@@ -5,6 +5,7 @@
     <th>Image</th>
     <th>Title & Description</th>
     <th>Price</th>
+    <th>Stock</th>
   </tr>
   <% for product in @products %>
     <tr>
@@ -16,6 +17,7 @@
         <%= product.description %>
       </td>
       <td><%= print_price(product.price) %></td>
+      <td><%= print_stock(product.stock) %></td>
     </tr>
   <% end %>
 </table>
