@@ -32,6 +32,6 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item = OrderItem.find(params[:id])
     @order_item.destroy
-    redirect_to order_items_url, :notice => "Successfully destroyed order item."
+    redirect_to order_path(@order), :notice => "Successfully destroyed order item."
   end
 end
