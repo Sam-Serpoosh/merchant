@@ -17,4 +17,12 @@ describe Product do
       p.should_not be_valid
     end
   end
+
+  context "#initializing" do
+    it "removes the $ sign form price value" do
+      price = "$$10.99"
+      product = Product.new(price: price)
+      product.price.should == 10.99
+    end
+  end
 end

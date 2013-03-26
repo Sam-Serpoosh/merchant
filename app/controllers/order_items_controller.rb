@@ -12,7 +12,7 @@ class OrderItemsController < ApplicationController
     if @order_item.save!
       redirect_to @order, :notice => "Successfully created order item."
     else
-      render :action => 'new'
+      render action: new
     end
   end
 
