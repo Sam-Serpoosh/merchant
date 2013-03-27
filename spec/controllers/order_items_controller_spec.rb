@@ -1,57 +1,13 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe OrderItemsController do
-  fixtures :all
-  render_views
-
-  it "index action should render index template" do
-    get :index
-    response.should render_template(:index)
-  end
-
-  it "show action should render show template" do
-    get :show, :id => OrderItem.first
-    response.should render_template(:show)
-  end
-
-  it "new action should render new template" do
-    get :new
-    response.should render_template(:new)
-  end
-
-  it "create action should render new template when model is invalid" do
-    OrderItem.any_instance.stubs(:valid?).returns(false)
-    post :create
-    response.should render_template(:new)
-  end
-
-  it "create action should redirect when model is valid" do
-    OrderItem.any_instance.stubs(:valid?).returns(true)
-    post :create
-    response.should redirect_to(order_item_url(assigns[:order_item]))
-  end
-
-  it "edit action should render edit template" do
-    get :edit, :id => OrderItem.first
-    response.should render_template(:edit)
-  end
-
-  it "update action should render edit template when model is invalid" do
-    OrderItem.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => OrderItem.first
-    response.should render_template(:edit)
-  end
-
-  it "update action should redirect when model is valid" do
-    OrderItem.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => OrderItem.first
-    response.should redirect_to(order_item_url(assigns[:order_item]))
-  end
-
-  it "destroy action should destroy model and redirect to index action" do
-    order_item = OrderItem.first
-    delete :destroy, :id => order_item
-    response.should redirect_to(order_items_url)
-    OrderItem.exists?(order_item.id).should be_false
+  describe "creating" do
+    it "increases the quantity of order item for same product" do
+      product = Product.create!(price: "10", stock: 5)
+      2.times do
+        post :create, product_id: product.id
+      end
+      Order.first.order_items[0].quantity.should == 2
+    end
   end
 end
