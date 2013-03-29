@@ -8,15 +8,17 @@
     <%= yield(:head) %>
   </head>
   <body>
-    <p style="color: green"><%= flash[:notice] %></p>
+    <p class="flash">
+      <%= flash.notice %>
+      <%= flash.alert %>
+    </p>
     <div class="wrapper">
       <div class="header">
         <h1>FoodWorks</h1>
-        <p>Your Online Grocery</p>
+        <h2>Your Online Grocery</h2>
       </div>
 
       <div class="sidebar">
-        (sidebar)
       </div>
 
       <div class="main">
