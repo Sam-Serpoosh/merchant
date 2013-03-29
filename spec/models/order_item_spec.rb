@@ -15,5 +15,10 @@ describe OrderItem do
       order_item.product_id = nil
       order_item.should_not be_valid
     end
+
+    it "has only positive quantity" do
+      order_item.quantity = 0
+      order_item.should_not be_valid
+    end
   end
 end

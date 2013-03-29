@@ -4,8 +4,8 @@ describe Order do
   context "#deleting" do
     it "also deletes containing order items" do
       order = Order.create!
-      order.order_items.build(product_id: 1)
-      order.order_items.build(product_id: 2)
+      order.order_items.build(product_id: 1, quantity: 1)
+      order.order_items.build(product_id: 2, quantity: 1)
       order.save!
       order.destroy
       Order.count.should == 0

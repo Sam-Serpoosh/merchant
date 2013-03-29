@@ -20,17 +20,38 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    @order_item = OrderItem.find(params[:id])
-    if @order_item.update_attributes(params[:order_item])
-      redirect_to @order, :notice  => "Successfully updated order item."
+    if zero_item?
+      remove_item
     else
-      render action: "edit"
+      update_item
     end
   end
 
   def destroy
     @order_item = OrderItem.find(params[:id])
     @order_item.destroy
-    redirect_to order_path(@order), :notice => "Successfully destroyed order item."
+    redirect_to order_path(@order), :notice => "Successfully removed item."
+  end
+
+  private 
+  
+  def zero_item?
+    params[:order_item][:quantity].to_i == 0
+  end
+
+  def remove_item
+    @order_item = OrderItem.find(params[:id])
+    @order_item.destroy
+    redirect_to order_path(@order), 
+      :notice => "Successfully removed item."
+  end
+
+  def update_item
+    @order_item = OrderItem.find(params[:id])
+    if @order_item.update_attributes(params[:order_item])
+      redirect_to @order, :notice  => "Successfully updated item."
+    else
+      render action: "edit"
+    end
   end
 end

@@ -10,4 +10,21 @@ describe OrderItemsController do
       Order.first.order_items[0].quantity.should == 2
     end
   end
+
+  describe "updating" do
+    it "removes the item when updating the quantity to 0" do
+      item = stub.as_null_object
+      item.should_receive(:destroy)
+      OrderItem.stub(:find) { item }
+
+      put :update, id: 1, order_item: { quantity: 0 }
+    end
+
+    it "updates the item with valid information" do
+      item = OrderItem.create!(order_id: 1, product_id: 1, quantity: 1)
+      put :update, id: item.id, order_item: { quantity: 10 }
+
+      OrderItem.first.quantity.should == 10
+    end
+  end
 end
