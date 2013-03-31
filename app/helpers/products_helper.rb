@@ -3,10 +3,12 @@ module ProductsHelper
     number_to_currency price
   end
 
-  def print_stock(stock)
-    if stock > 0
+  def print_stock(stock, requested = 1)
+    if stock >= requested
       "<span class='in_stock'>In Stock (#{stock})</span>".html_safe
-    else
+    elsif stock < requested && stock != 0
+      "<span class='low_stock'>Insufficient Stock</span>".html_safe
+    elsif stock
       "<span class='out_stock'>Out of Stock</span>".html_safe
     end
   end

@@ -21,20 +21,13 @@
     <th>Items</th>
     <th>Title</th>
     <th>Quantity</th>
+    <th>Stock</th>
     <th>Unit Price</th>
     <th>Subtotal</th>
   </tr>
 
   <% @order.order_items.each do |item| %>
-    <tr>
-      <td><%= image_tag "products/#{item.product.image_url}" %></td>
-      <td><%= item.product.title %></td>
-      <td><%= link_to item.quantity, edit_order_item_path(item) %></td>
-      <td><%= print_price item.product.price %></td>
-      <td><%= print_price item.subtotal %></td>
-      <td><%= link_to "Remove", item,
-        :confirm => 'Are you sure?', method: :delete %></td>
-    </tr>
+    <%= render "order_items/order_item_row", item: item %>
   <% end %>
 </table>
 <br />
