@@ -27,4 +27,14 @@ describe OrderItemsController do
       OrderItem.first.quantity.should == 10
     end
   end
+
+  describe "destroying" do
+    it "removes the item and redirect to order show" do
+      order_item = OrderItem.create!(order_id: 1, product_id: 1, quantity: 1)
+      lambda do
+        delete :destroy, id: order_item.id
+        response.should redirect_to(order_path(assigns(:order)))
+      end.should change(OrderItem, :count).by -1
+    end
+  end
 end

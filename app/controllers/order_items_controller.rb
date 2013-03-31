@@ -28,9 +28,7 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    @order_item = OrderItem.find(params[:id])
-    @order_item.destroy
-    redirect_to order_path(@order), :notice => "Successfully removed item."
+    remove_item
   end
 
   private 
