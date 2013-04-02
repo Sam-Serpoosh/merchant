@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
+  include ProductPresenter
+
   attr_accessible :title, :price, :description, :image_url, :stock
 
   has_many :order_items

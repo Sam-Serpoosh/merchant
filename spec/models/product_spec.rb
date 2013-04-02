@@ -25,4 +25,12 @@ describe Product do
       product.price.should == 10.99
     end
   end
+
+  context "#print_stock" do
+    it "prints its stock based on reqeust" do
+      p = Product.create!(price: "20.99", stock: 10)
+      p.print_stock(20).should == 
+        "<span class='low_stock'>Insufficient Stock</span>"
+    end
+  end
 end
