@@ -5,6 +5,9 @@ Merchant::Application.routes.draw do
 
   match "/auth/:provider/callback", to: "sessions#create"
 
+  match "/login" => redirect("/auth/twitter")
+  match "/logout", to: "sessions#destroy"
+
   root to: "products#index"
 
   # The priority is based upon order of creation:
