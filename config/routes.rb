@@ -3,6 +3,8 @@ Merchant::Application.routes.draw do
   resources :order_items
   resources :products
 
+  match "/auth/:provider/callback", to: "sessions#create"
+
   root to: "products#index"
 
   # The priority is based upon order of creation:
