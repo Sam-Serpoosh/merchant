@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe Order do
   context "#deleting" do
@@ -23,6 +23,16 @@ describe Order do
 
     it "calculates order total price" do
       @order.total.should == 30
+    end
+  end
+
+  context "#association" do
+    it "belongs to user" do
+      user = User.new(name: "bob", uid: 1)
+      order = user.orders.build(status: "unsubmitted")
+      user.save!
+
+      Order.first.user.should == user
     end
   end
 end
