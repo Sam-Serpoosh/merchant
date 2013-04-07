@@ -1,5 +1,7 @@
 class Address < ActiveRecord::Base
   attr_accessible :city, :line1, :line2, :state, :user_id, :zip
+
+  has_many :orders
   belongs_to :user
 
   validates :line1, presence: true

@@ -60,5 +60,18 @@ describe Address do
 
       Address.first.user.should == user
     end
+
+    it "has many orders" do
+      user = User.create!(name: "Bob")
+      address = Address.create!(line1: "32 winter Ave",
+                                city: "Grand Heaven",
+                                state: "MI",
+                                zip: "98101")
+      address.orders.build(status: "unsubmitted")
+      address.save!
+
+      address.orders.count.should == 1
+      address.orders.first.status.should == "unsubmitted"
+    end
   end
 end
