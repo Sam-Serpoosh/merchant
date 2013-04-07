@@ -1,35 +1,50 @@
 <h2>Your Order</h2>
 
-<table>
-  <tr>
-    <th>Customer</th>
-    <td><%= @order.user.name if @order.user %></td>
-  </tr>
-  <tr>
-    <th>Status:</th>
-    <td><%= @order.status %></td>
-  </tr>
-  <tr>
-    <th>Items:</th>
-    <td><%= @order.order_items.count %></td>
-  </tr>
-  <tr>
-    <th>Total:</th>
-    <td><%= print_price @order.total %></td>
-  </tr>
-  <tr>
-    <th>Items</th>
-    <th>Title</th>
-    <th>Quantity</th>
-    <th>Stock</th>
-    <th>Unit Price</th>
-    <th>Subtotal</th>
-  </tr>
+<%= form_for @order do |f| %>
+  <table>
+    <tr>
+      <th>Customer</th>
+      <td><%= @order.user.name if @order.user %></td>
+    </tr>
+    <tr>
+      <th>Status:</th>
+      <td><%= @order.status %></td>
+    </tr>
+    <tr>
+      <th>Items:</th>
+      <td><%= @order.order_items.count %></td>
+    </tr>
+    <tr>
+      <th>Total:</th>
+      <td><%= print_price @order.total %></td>
+    </tr>
+    <tr>
+      <th>Items</th>
+      <th>Title</th>
+      <th>Quantity</th>
+      <th>Stock</th>
+      <th>Unit Price</th>
+      <th>Subtotal</th>
+    </tr>
 
-  <% @order.order_items.each do |item| %>
-    <%= render "order_items/order_item_row", item: item %>
-  <% end %>
-</table>
+    <% @order.order_items.each do |item| %>
+      <%= render "order_items/order_item_row", item: item %>
+    <% end %>
+
+    <tr>
+      <th>Shipping To:</th>
+      <td>
+        <div>
+          <%= f.select(:address_id, current_user.addresses.all.
+                       collect { |a| [ a.to_s, a.id ] }) %>
+        </div>
+        <div>
+          <%= link_to "New Address?", new_address_path %>
+        </div>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
 <br />
-<%= link_to "Empty Cart", @order, comfirm: "Are you sure?", 
-  method: :delete %>
+<%= link_to "Empty Cart", @order, comfirm: "Are you sure?", method: :delete %>

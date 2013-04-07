@@ -71,4 +71,11 @@ describe Address do
       address.orders.first.status.should == "unsubmitted"
     end
   end
+
+  context "#to_s" do
+    it "gives a standard address format" do
+      address = create_address
+      address.to_s.should == "32 winter Ave, Grand Heaven, MI 98101"
+    end
+  end
 end

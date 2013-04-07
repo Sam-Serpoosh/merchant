@@ -8,4 +8,8 @@ class Address < ActiveRecord::Base
   validates :city, presence: true
   validates :state, presence: true, format: /^[A-Z][A-Z]$/
   validates :zip, presence: true, format: /\d{5}/
+
+  def to_s
+    "#{line1}, #{city}, #{state} #{zip}"
+  end
 end
