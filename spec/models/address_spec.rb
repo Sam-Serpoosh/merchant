@@ -63,10 +63,7 @@ describe Address do
 
     it "has many orders" do
       user = User.create!(name: "Bob")
-      address = Address.create!(line1: "32 winter Ave",
-                                city: "Grand Heaven",
-                                state: "MI",
-                                zip: "98101")
+      address = create_address
       address.orders.build(status: "unsubmitted")
       address.save!
 

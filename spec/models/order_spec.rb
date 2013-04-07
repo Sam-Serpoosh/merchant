@@ -36,10 +36,7 @@ describe Order do
     end
 
     it "belongs to an address" do
-      address = Address.create!(line1: "32 winter Ave",
-                                city: "Grand Heaven",
-                                state: "MI",
-                                zip: "98101")
+      address = create_address
       order = Order.new(status: "unsubmitted")
       order.address_id = address.id
       order.save!
