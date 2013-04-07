@@ -10,5 +10,17 @@ describe User do
 
       user.orders.count.should == 2
     end
+
+    it "has many addresses" do
+      user = User.new(name: "bob", uid: 1)
+      user.addresses.build(line1: "32 winter Ave", 
+                           city: "Grand Heaven", 
+                           state: "MI", 
+                           zip: "98101")
+      user.save!
+
+      user.addresses.count.should == 1
+      user.addresses.first.city.should == "Grand Heaven"
+    end
   end
 end
