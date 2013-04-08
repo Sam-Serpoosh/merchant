@@ -58,7 +58,7 @@ describe Address do
       user.addresses.build(attrs)
       user.save!
 
-      Address.first.user.should == user
+      Address.find_by_user_id(user.id).user.should == user
     end
 
     it "has many orders" do

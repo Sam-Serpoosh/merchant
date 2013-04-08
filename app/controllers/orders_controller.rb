@@ -7,29 +7,16 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def new
-    @order = Order.new
-  end
-
-  def create
-    @order = Order.new(params[:order])
-    if @order.save
-      redirect_to @order, :notice => "Successfully created order."
-    else
-      render :action => 'new'
-    end
-  end
-
   def edit
     @order = Order.find(params[:id])
   end
 
   def update
-    @order = Order.find(params[:id])
+    submit_order
     if @order.update_attributes(params[:order])
       redirect_to @order, :notice  => "Successfully updated order."
     else
-      render :action => 'edit'
+      render action: "edit"
     end
   end
 
@@ -37,5 +24,13 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.destroy
     redirect_to products_path, :notice => "Successfully destroyed order."
+  end
+
+  private
+
+  def submit_order
+    @order = Order.find(params[:id])
+    @order.address_id = params[:order].delete(:address_id)
+    @order.status = "submitted"
   end
 end

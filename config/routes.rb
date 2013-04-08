@@ -2,6 +2,7 @@ Merchant::Application.routes.draw do
   resources :orders
   resources :order_items
   resources :products
+  resources :addresses
 
   match "/auth/:provider/callback", to: "sessions#create"
 
