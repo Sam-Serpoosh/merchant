@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
   helper_method :current_user
 
@@ -22,6 +23,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def not_found
+    render file: "public/404.html", status: 404, layout: false
+  end
 
   def connect_current_user_to_order
     if current_user
