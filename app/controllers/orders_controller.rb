@@ -1,19 +1,12 @@
 class OrdersController < ApplicationController
-  def index
-    @orders = Order.all
-  end
-
   def show
     @order = Order.find(params[:id])
   end
 
-  def edit
-    @order = Order.find(params[:id])
-  end
-
-  def update
+  def purchase
     submit_order
-    if @order.update_attributes(params[:order])
+    if @order.save
+      session[:order_id] = nil
       redirect_to @order, :notice  => "Successfully updated order."
     else
       render action: "edit"

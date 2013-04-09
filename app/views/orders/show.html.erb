@@ -1,6 +1,6 @@
 <h2>Your Order</h2>
 
-<%= form_for @order do |f| %>
+<%= form_for @order, url: purchase_order_path(@order), method: :put do |f| %>
   <table>
     <tr>
       <th>Customer</th>
