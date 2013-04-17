@@ -11,14 +11,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
-  gem 'nifty-generators'
-end
-
 group :test do
   gem 'rspec-rails'
   gem 'webrat', '0.7.2'
-  gem 'mocha'
 end
 
 gem 'jquery-rails'
