@@ -25,8 +25,9 @@ describe StubSessionsController do
     it "logs the user out and delete the order" do
       post :create
       delete :destroy
-      controller.send(:current_user).should be_nil
       session[:order_id].should be_nil
+      session[:user_id].should be_nil
+      controller.current_user.should be_nil
     end
   end
 end

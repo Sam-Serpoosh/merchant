@@ -8,12 +8,19 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
-    session[:order_id] = nil
+    log_out
     redirect_to root_path, notice: "Goodbye!"
   end
 
   def authentication_info
     request.env["omniauth.auth"]
+  end
+
+  private
+
+  def log_out
+    session[:order_id] = nil
+    session[:user_id] = nil
+    self.current_user = nil
   end
 end

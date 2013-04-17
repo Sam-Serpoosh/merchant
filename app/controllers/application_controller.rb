@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     connect_current_user_to_order
   end
 
+  def current_user=(user)
+    @current_user = user
+  end
+
   def current_user
     begin
       @current_user ||= User.find(session[:user_id])
